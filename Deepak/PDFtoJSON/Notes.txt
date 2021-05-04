@@ -1,0 +1,5 @@
+
+Step 1: Run minor_text_generator.py
+Step 2: Run extract_metadata.py
+
+Output: e.g. dispensaries_20210503.json
