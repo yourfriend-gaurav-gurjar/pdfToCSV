@@ -1,5 +1,6 @@
 import pdfplumber
 import pandas as pd
+import re
 # with pdfplumber.open("path/to/file.pdf") as pdf:
 #     first_page = pdf.pages[0]
 #     print(first_page.chars[0])
@@ -7,19 +8,27 @@ import pandas as pd
 pdf = pdfplumber.open("dispensaries_20210503.pdf")
 # page = pdf.pages[0]
 pages = pdf.pages
+counter = 0
+# Dumping the CSVs of every page of the PDF
+
 for i in pages:
     table = i.extract_table()
     df = pd.DataFrame(table[0:], columns=table[0])
-    df = df.append(df)
+    counter= counter+1
+    df.to_csv(str(counter) + "test.csv")
 
-#page.extract_table()
-
-#im = page.to_image()
-# table = page.extract_table()
-# print(table[:3])
+# Manipulating df
 
 
-# for column in ["EMAIL", "PHONE"]:
-#     df[column] = df[column].str.replace(" ", "")
-# df = pd.DataFrame(table[0:], columns=table[0])
-print(df)
+# Grouping dataframe
+for i in pages:
+    table = i.extract_table()
+    df = pd.DataFrame(table[0:], columns=table[0])
+#    df.columns("id","company_name", "license_number", "email", "phone", "city", "zip","country")
+    df2 = pd.DataFrame()
+    df2 = df2.append(df, ignore_index=True)
+    # counter= counter+1
+    # df2.to_csv(str(counter) + "test.csv")
+    # df2.to_csv("grouped.csv")
+
+df2.to_csv("grouped.csv")
