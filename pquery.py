@@ -1,16 +1,16 @@
 # Libraries
 import pdfquery
-#import pandas_read_xml as pdx
+import pandas_read_xml as pdx
 
 # Convert PDF to XML format
 pdf = pdfquery.PDFQuery("dispensaries_20210503.pdf")
-pdf.load()
-print(pdf.tree)
-pdf.tree.write("dispensaries_20210503.xml", pretty_print=True, encoding="utf-8")
-# pdf.tree.xpath('//*/LTPage')
-# print(pdf.pq('LTPage[LTTextBoxHorizontal]'))
-#df = pdx.read_xml("test_1.xml", ['pdfxml', 'LTPage', 'LTTextLineHorizontal', 'LTTextBoxHorizontal'])
-
+#pdf.load()
+#print(pdf.tree)
+#pdf.tree.write("dispensaries_20210503.xml", pretty_print=True, encoding="utf-8")
+pdf.tree.xpath('//*/LTPage')
+print(pdf.pq('LTPage[LTTextBoxHorizontal]'))
+# df = pdx.read_xml("test_1.xml", ['pdfxml', 'LTPage', 'LTTextLineHorizontal', 'LTTextBoxHorizontal'])
+# print(df)
 # Meta Data of the PDF
 # metadata_df = pdx.read_xml("test_1.xml", ['pdfxml', 'LTPage', 'LTTextLineHorizontal'], root_is_rows=False)
 # print(metadata_df)
