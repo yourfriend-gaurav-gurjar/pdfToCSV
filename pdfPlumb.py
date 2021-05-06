@@ -13,7 +13,9 @@ counter = 0
 
 for i in pages:
     table = i.extract_table()
-    df = pd.DataFrame(table[0:], columns=table[0])
+#    df = pd.DataFrame(table[0:], columns=table[0])
+    df = pd.DataFrame(table[0:])
+    df.columns("company_name", "license_number", "email", "phone", "city", "zip","country")
     counter= counter+1
     df.to_csv(str(counter) + "test.csv")
 
@@ -21,14 +23,14 @@ for i in pages:
 
 
 # Grouping dataframe
-for i in pages:
-    table = i.extract_table()
-    df = pd.DataFrame(table[0:], columns=table[0])
-#    df.columns("id","company_name", "license_number", "email", "phone", "city", "zip","country")
-    df2 = pd.DataFrame()
-    df2 = df2.append(df, ignore_index=True)
-    # counter= counter+1
-    # df2.to_csv(str(counter) + "test.csv")
-    # df2.to_csv("grouped.csv")
-
-df2.to_csv("grouped.csv")
+# for i in pages:
+#     table = i.extract_table()
+#     df = pd.DataFrame(table[0:], columns=table[0])
+# #    df.columns("id","company_name", "license_number", "email", "phone", "city", "zip","country")
+#     df2 = pd.DataFrame()
+#     df2 = df2.append(df, ignore_index=True)
+#     # counter= counter+1
+#     # df2.to_csv(str(counter) + "test.csv")
+#     # df2.to_csv("grouped.csv")
+#
+# df2.to_csv("grouped.csv")
