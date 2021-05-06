@@ -1,9 +1,5 @@
 import pdfplumber
 import pandas as pd
-import re
-# with pdfplumber.open("path/to/file.pdf") as pdf:
-#     first_page = pdf.pages[0]
-#     print(first_page.chars[0])
 
 pdf = pdfplumber.open("dispensaries_20210503.pdf")
 # page = pdf.pages[0]
@@ -17,9 +13,14 @@ for i in pages:
     df = pd.DataFrame(table[0:])
     df.columns("company_name", "license_number", "email", "phone", "city", "zip","country")
     counter= counter+1
-    df.to_csv(str(counter) + "test.csv")
+    df.to_csv(str(counter) + "_test.csv", index=False)
 
 # Manipulating df
+# for i in pages:
+#     table = i.extract_table()
+#     df = pd.DataFrame(table[0:], columns=["company_name", "license_number", "email", "phone", "city", "zip", "country"]).fillna("missing")
+#     counter= counter+1
+#     df.to_csv(str(counter) + "test.csv", index=False)
 
 
 # Grouping dataframe
