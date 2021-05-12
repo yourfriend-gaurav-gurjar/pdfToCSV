@@ -9,7 +9,9 @@ counter = 0
 
 for i in pages:
     table = i.extract_table()
-    df = pd.DataFrame(table[0:], columns=table[0])
+#    df = pd.DataFrame(table[0:], columns=table[0])
+    df = pd.DataFrame(table[0:])
+    df.columns("company_name", "license_number", "email", "phone", "city", "zip","country")
     counter= counter+1
     df.to_csv(str(counter) + "_test.csv", index=False)
 
