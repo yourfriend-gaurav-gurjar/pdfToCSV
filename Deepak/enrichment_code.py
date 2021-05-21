@@ -91,9 +91,10 @@ growers.to_csv("growers_df.csv", index=False)
 transporter = pd.read_csv("transporter20210507.csv").drop(['Unnamed: 0', 'Unnamed: 0.1'],axis=1)
 transporter['License_type'] = "transporter"
 transporter = transporter[transporter['0'].notnull()]
-transporter_7thColIndex = transporter['7'].notnull()
 
+transporter_7thColIndex = transporter['7'].notnull()
 missing_data = transporter[transporter_7thColIndex]
+
 missing_data.drop('1', inplace=True, axis=1)
 missing_data.drop('2', inplace=True, axis=1)
 missing_data.columns=['business', 'license', 'email', 'phone', 'city', 'zip', 'county', 'license_type']
@@ -128,13 +129,14 @@ processor['License_type'] = "processor"
 processor = processor[processor['0'].notnull()]
 
 processor_7thColIndex = processor['7'].notnull()
+
 missing_data = processor[processor_7thColIndex]
 missing_data.drop('1', inplace=True, axis=1)
 missing_data.drop('2', inplace=True, axis=1)
 missing_data.columns=['business', 'license', 'email', 'phone', 'city', 'zip', 'county', 'license_type']
 missing_data = missing_data.replace('\n','', regex=True)
 missing_data['zip'] = missing_data['zip'].astype("int64")
-data=missing_data['business'].str.split(r'Trade Name:', expand=True)
+data = missing_data['business'].str.split(r'Trade Name:', expand=True)
 missing_data['trade_name'] = data[1]
 missing_data['business'] = data[0]
 
@@ -142,15 +144,16 @@ index_names_processor = processor[processor['7'].notnull()].index
 processor.drop(index_names_processor, inplace=True)
 processor.drop('7', inplace=True, axis=1)
 processor.drop('8', inplace=True, axis=1)
-processor.columns=['business', 'license', 'email', 'phone', 'city', 'zip', 'county', 'license_type']
+processor.columns = ['business', 'license', 'email', 'phone', 'city', 'zip', 'county', 'license_type']
 processor = processor.replace('\n','', regex=True)
 processor['zip'] = processor['zip'].astype("int64")
-data=processor['business'].str.split(r'Trade Name:', expand=True)
+data = processor['business'].str.split(r'Trade Name:', expand=True)
 processor['trade_name'] = data[1]
 processor['business'] = data[0]
 
 frame = [processor, missing_data]
 processor = pd.concat(frame)
+
 processor.to_csv("processor_df.csv", index=False)
 
 
